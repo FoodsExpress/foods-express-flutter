@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foods_express/common/view/root_tab.dart';
 import 'package:foods_express/common/view/splash_screen.dart';
+import 'package:foods_express/restaurant/view/restaurant_detail_screen.dart';
 import 'package:foods_express/user/model/user_model.dart';
 import 'package:foods_express/user/provider/user_me_provider.dart';
 import 'package:foods_express/user/view/login_screen.dart';
@@ -24,7 +26,17 @@ class AuthProvider extends ChangeNotifier {
   }
 
   List<GoRoute> get routes => [
-
+        GoRoute(
+            path: '/',
+            name: RootTab.routeName,
+            builder: (_, __) => const RootTab(),
+            routes: [
+              GoRoute(
+                  path: 'restaurant/:rid',
+                  builder: (_, state) => RestaurantDetailScreen(
+                        id: state.pathParameters['rid']!,
+                      ))
+            ]),
         GoRoute(
           path: '/splash',
           name: SplashScreen.routeName,
@@ -37,7 +49,7 @@ class AuthProvider extends ChangeNotifier {
         ),
       ];
 
-  void logout(){
+  void logout() {
     ref.read(userMeProvider.notifier).logout();
   }
 
@@ -49,8 +61,7 @@ class AuthProvider extends ChangeNotifier {
   String? redirectLogic(GoRouterState state) {
     final UserModelBase? user = ref.read(userMeProvider);
 
-    final loginIn = state.path == '/login';
-
+    final loginIn = state.topRoute?.path == '/login';
     // 유저 정보가 없는데
     // 로그인중이면 그대로 로그인 페이지에 두고
     // 만약에 로그인중이 아니라면 로그인 페이지로 이동
@@ -65,7 +76,7 @@ class AuthProvider extends ChangeNotifier {
     // 로그인 중이거나 현재 위치가 SplashScreen이면
     // 홈으로 이동
     if (user is UserModel) {
-      return loginIn || state.path == '/splash' ? '/' : null;
+      return loginIn || state.topRoute?.path == '/splash' ? '/' : null;
     }
 
     // UserModelError

@@ -1,4 +1,3 @@
-
 import 'package:foods_express/common/utils/data_utils.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -19,7 +18,8 @@ class UserModelLoading extends UserModelBase {}
 @JsonSerializable()
 class UserModel extends UserModelBase {
   final String id;
-  final String username;
+  final String nickname;
+  final String email;
   @JsonKey(
     fromJson: DataUtils.pathToUrl,
   )
@@ -27,7 +27,8 @@ class UserModel extends UserModelBase {
 
   UserModel({
     required this.id,
-    required this.username,
+    required this.nickname,
+    required this.email,
     required this.imageUrl,
   });
 

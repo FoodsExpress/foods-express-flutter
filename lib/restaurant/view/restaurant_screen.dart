@@ -19,7 +19,7 @@ class RestaurantScreen extends StatelessWidget {
             context.goNamed(
               RestaurantDetailScreen.routeName,
               pathParameters: {
-                'rid': model.id,
+                'rid': model.restaurant.id,
               },
             );
           },

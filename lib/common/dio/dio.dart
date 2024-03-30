@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:foods_express/common/const/data.dart';
@@ -37,7 +38,9 @@ class CustomInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    print('[REQ] [${options.method}] ${options.uri}');
+    if (kDebugMode) {
+      print('[REQ] [${options.method}] ${options.uri}');
+    }
 
     if (options.headers['accessToken'] == 'true') {
       // 헤더 삭제
@@ -69,19 +72,24 @@ class CustomInterceptor extends Interceptor {
   // 2) 응답을 받을때
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print(
-        '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}');
+    if (kDebugMode) {
+      print(
+          '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}');
+    }
 
     return super.onResponse(response, handler);
   }
 
   // 3) 에러가 났을때
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
+    print(err.response);
     // 401에러가 났을때 (status code)
     // 토큰을 재발급 받는 시도를하고 토큰이 재발급되면
     // 다시 새로운 토큰으로 요청을한다.
-    print('[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
+    if (kDebugMode) {
+      print('[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
+    }
 
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
 
@@ -101,11 +109,8 @@ class CustomInterceptor extends Interceptor {
       try {
         final resp = await dio.post(
           'http://$ip/auth/token',
-          options: Options(
-            headers: {
-              'authorization': 'Bearer $refreshToken',
-            },
-          ),
+          options: Options(headers: {'Content-Type': 'application/json'}),
+          data: {'refreshToken': refreshToken},
         );
 
         final accessToken = resp.data['accessToken'];
@@ -123,7 +128,7 @@ class CustomInterceptor extends Interceptor {
         final response = await dio.fetch(options);
 
         return handler.resolve(response);
-      } on DioError catch (e) {
+      } on DioException catch (e) {
         // circular dependency error
         // A, B
         // A -> B의 친구
@@ -135,7 +140,7 @@ class CustomInterceptor extends Interceptor {
 
         return handler.reject(e);
       }
-    }
+    } else {}
 
     return handler.reject(err);
   }

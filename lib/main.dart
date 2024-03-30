@@ -3,15 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foods_express/common/provider/go_router.dart';
 
 void main() {
-  runApp(
-      const ProviderScope(
-          child: _App()
-      )
-  );
+  runApp(const ProviderScope(child: _App()));
 }
 
 class _App extends ConsumerWidget {
-  const _App({super.key});
+  const _App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

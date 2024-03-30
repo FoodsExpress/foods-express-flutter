@@ -66,7 +66,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
           controller.animateTo(index);
         },
         currentIndex: index,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: '홈',

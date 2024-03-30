@@ -40,7 +40,7 @@ class RatingCard extends StatelessWidget {
       ),
       images: model.imgUrls.map((e) => Image.network(e)).toList(),
       rating: model.rating,
-      email: model.user.username,
+      email: model.user.nickname,
       content: model.content,
     );
   }

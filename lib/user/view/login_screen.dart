@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foods_express/common/component/custom_text_form_field_with_label.dart';
 import 'package:foods_express/common/const/colors.dart';
 import 'package:foods_express/common/layout/default_layout.dart';
-import 'package:foods_express/common/view/root_tab.dart';
 import 'package:foods_express/user/model/user_model.dart';
 import 'package:foods_express/user/provider/user_me_provider.dart';
 
@@ -55,6 +54,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   onChanged: (String value) {
                     password = value;
                   },
+                  obscureText: true,
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
@@ -65,7 +65,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 email: email,
                                 password: password,
                               );
-
                           // ID:비밀번호
                           // final rawString = 'email:$password';
                           //
@@ -94,15 +93,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           //   MaterialPageRoute(
                           //     builder: (_) => RootTab(),
                           //   ),
-                          // );
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const RootTab()));
+                          // // );
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (_) => const RootTab()));
                         },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: PRIMARY_COLOR,
                   ),
                   child:
                       const Text('로그인', style: TextStyle(color: Colors.white)),
+                ),
+                TextButton(
+                  onPressed: () async {},
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.black,
+                  ),
+                  child: const Text(
+                    '회원가입',
+                  ),
                 ),
               ],
             ),

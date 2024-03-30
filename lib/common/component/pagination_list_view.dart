@@ -25,7 +25,8 @@ class PaginationListView<T extends IModelWithId>
       _PaginationListViewState<T>();
 }
 
-class _PaginationListViewState<T extends IModelWithId> extends ConsumerState<PaginationListView> {
+class _PaginationListViewState<T extends IModelWithId>
+    extends ConsumerState<PaginationListView> {
   final ScrollController controller = ScrollController();
 
   @override
@@ -95,10 +96,10 @@ class _PaginationListViewState<T extends IModelWithId> extends ConsumerState<Pag
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: () async {
           ref.read(widget.provider.notifier).paginate(
-            forceRefetch: true,
-          );
+                forceRefetch: true,
+              );
         },
         child: ListView.separated(
           physics: const AlwaysScrollableScrollPhysics(),

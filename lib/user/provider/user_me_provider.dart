@@ -45,8 +45,11 @@ class UserMeStateNotifier extends StateNotifier<UserModelBase?> {
     }
 
     final resp = await repository.getMe();
-
-    state = resp;
+    if (!resp.success) {
+      print('정보 조회 실패');
+      return;
+    }
+    state = resp.response;
   }
 
   Future<UserModelBase> login({
@@ -55,20 +58,17 @@ class UserMeStateNotifier extends StateNotifier<UserModelBase?> {
   }) async {
     try {
       state = UserModelLoading();
-
       final resp = await authRepository.login(
         email: email,
         password: password,
       );
-
       await storage.write(key: REFRESH_TOKEN_KEY, value: resp.refreshToken);
       await storage.write(key: ACCESS_TOKEN_KEY, value: resp.accessToken);
 
       final userResp = await repository.getMe();
+      state = userResp.response;
 
-      state = userResp;
-
-      return userResp;
+      return userResp.response;
     } catch (e) {
       state = UserModelError(message: '로그인에 실패했습니다.');
 
