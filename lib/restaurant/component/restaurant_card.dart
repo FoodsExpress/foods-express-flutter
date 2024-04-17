@@ -17,10 +17,14 @@ class RestaurantCard extends StatelessWidget {
   final int ratingsCount;
 
   // 배송걸리는 시간
-  final int deliveryTime;
+  final int deliveryTimeFrom;
+
+  final int deliveryTimeTo;
 
   // 배송 비용
-  final int deliveryFee;
+  final int deliveryFeeFrom;
+
+  final int deliveryFeeTo;
 
   // 평균 평점
   final double ratings;
@@ -29,7 +33,7 @@ class RestaurantCard extends StatelessWidget {
   final bool isDetail;
 
   // Hero 위젯 태그
-  final String? heroKey;
+  final int? heroKey;
 
   // 상세 내용
   final String? detail;
@@ -39,8 +43,10 @@ class RestaurantCard extends StatelessWidget {
     required this.name,
     required this.tags,
     required this.ratingsCount,
-    required this.deliveryTime,
-    required this.deliveryFee,
+    required this.deliveryTimeFrom,
+    required this.deliveryTimeTo,
+    required this.deliveryFeeFrom,
+    required this.deliveryFeeTo,
     required this.ratings,
     this.isDetail = false,
     this.detail,
@@ -61,8 +67,10 @@ class RestaurantCard extends StatelessWidget {
       name: model.name,
       tags: model.tags,
       ratingsCount: model.ratingsCount,
-      deliveryTime: model.deliveryTime,
-      deliveryFee: model.deliveryFee,
+      deliveryTimeFrom: model.deliveryTimeFrom,
+      deliveryTimeTo: model.deliveryTimeTo,
+      deliveryFeeFrom: model.deliveryFeeFrom,
+      deliveryFeeTo: model.deliveryFeeTo,
       ratings: model.ratings,
       isDetail: isDetail,
       detail: model is RestaurantDetailModel ? model.detail : null,
@@ -122,12 +130,14 @@ class RestaurantCard extends StatelessWidget {
                   renderDot(),
                   _IconText(
                     icon: Icons.timelapse_outlined,
-                    label: '$deliveryTime 분',
+                    label: '$deliveryTimeFrom 분 ~ $deliveryFeeTo 분',
                   ),
                   renderDot(),
                   _IconText(
                     icon: Icons.monetization_on,
-                    label: deliveryFee == 0 ? '무료' : deliveryFee.toString(),
+                    label: deliveryFeeFrom == 0
+                        ? '무료'
+                        : '$deliveryFeeFrom 원 ~ $deliveryFeeTo 원',
                   ),
                 ],
               ),

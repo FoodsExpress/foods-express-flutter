@@ -7,7 +7,7 @@ part 'order_model.g.dart';
 
 @JsonSerializable()
 class OrderProductModel {
-  final String id;
+  final int id;
   final String name;
   final String detail;
   @JsonKey(
@@ -45,7 +45,7 @@ class OrderProductAndCountModel {
 @JsonSerializable()
 class OrderModel implements IModelWithId {
   @override
-  final String id;
+  final int id;
   final List<OrderProductAndCountModel> products;
   final int totalPrice;
   final RestaurantModel restaurant;

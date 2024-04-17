@@ -15,8 +15,7 @@ final restaurantRepositoryProvider = Provider<RestaurantRepository>(
   (ref) {
     final dio = ref.watch(dioProvider);
 
-    final repository =
-        RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
+    final repository = RestaurantRepository(dio, baseUrl: 'http://$ip/store');
 
     return repository;
   },
@@ -30,7 +29,7 @@ abstract class RestaurantRepository
       _RestaurantRepository;
 
   // http://$ip/restaurant/
-  @GET('/')
+  @GET('')
   @Headers({
     'accessToken': 'true',
   })

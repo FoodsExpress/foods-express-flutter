@@ -1,4 +1,3 @@
-
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foods_express/common/model/cursor_pagination_model.dart';
@@ -12,18 +11,18 @@ class _PaginationInfo {
   final bool forceRefetch;
 
   _PaginationInfo({
-    this.fetchCount = 20,
+    this.fetchCount = 10,
     this.fetchMore = false,
     this.forceRefetch = false,
   });
 }
 
 class PaginationProvider<T extends IModelWithId,
-U extends IBasePaginationRepository<T>>
+        U extends IBasePaginationRepository<T>>
     extends StateNotifier<CursorPaginationBase> {
   final U repository;
   final paginationThrottle = Throttle(
-    Duration(seconds: 3),
+    const Duration(seconds: 3),
     initialValue: _PaginationInfo(),
     checkEquality: false,
   );
@@ -34,7 +33,7 @@ U extends IBasePaginationRepository<T>>
     paginate();
 
     paginationThrottle.values.listen(
-          (state) {
+      (state) {
         _throttledPagination(state);
       },
     );
@@ -95,7 +94,7 @@ U extends IBasePaginationRepository<T>>
 
       // PaginationParams 생성
       PaginationParams paginationParams = PaginationParams(
-        count: fetchCount,
+        size: fetchCount,
       );
 
       // fetchMore
@@ -109,7 +108,7 @@ U extends IBasePaginationRepository<T>>
         );
 
         paginationParams = paginationParams.copyWith(
-          after: pState.data.last.id,
+          page: pState.data.last.id,
         );
       }
       // 데이터를 처음부터 가져오는 상황

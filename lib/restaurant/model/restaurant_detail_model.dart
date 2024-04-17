@@ -11,14 +11,16 @@ class RestaurantDetailModel extends RestaurantModel {
 
   RestaurantDetailModel({
     required super.id,
+    required super.uuid,
     required super.name,
     required super.thumbUrl,
     required super.tags,
-    required super.priceRange,
     required super.ratings,
     required super.ratingsCount,
-    required super.deliveryTime,
-    required super.deliveryFee,
+    required super.deliveryTimeFrom,
+    required super.deliveryTimeTo,
+    required super.deliveryFeeFrom,
+    required super.deliveryFeeTo,
     required this.detail,
     required this.products,
   });
@@ -29,7 +31,8 @@ class RestaurantDetailModel extends RestaurantModel {
 
 @JsonSerializable()
 class RestaurantProductModel {
-  final String id;
+  final int id;
+  final String uuid;
   final String name;
   @JsonKey(
     fromJson: DataUtils.pathToUrl,
@@ -40,6 +43,7 @@ class RestaurantProductModel {
 
   RestaurantProductModel({
     required this.id,
+    required this.uuid,
     required this.name,
     required this.imgUrl,
     required this.detail,

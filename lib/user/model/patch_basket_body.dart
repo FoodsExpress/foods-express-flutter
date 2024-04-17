@@ -18,14 +18,14 @@ class PatchBasketBody {
 
   PatchBasketBody({
     required this.basket,
-});
+  });
 
   Map<String, dynamic> toJson() => _$PatchBasketBodyToJson(this);
 }
 
 @JsonSerializable()
 class PatchBasketBodyBasket {
-  final String productId;
+  final int productId;
   final int count;
 
   PatchBasketBodyBasket({
@@ -33,8 +33,8 @@ class PatchBasketBodyBasket {
     required this.count,
   });
 
-  factory PatchBasketBodyBasket.fromJson(Map<String, dynamic> json)
-  => _$PatchBasketBodyBasketFromJson(json);
+  factory PatchBasketBodyBasket.fromJson(Map<String, dynamic> json) =>
+      _$PatchBasketBodyBasketFromJson(json);
 
   Map<String, dynamic> toJson() => _$PatchBasketBodyBasketToJson(this);
 }

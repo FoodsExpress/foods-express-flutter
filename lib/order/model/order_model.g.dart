@@ -8,7 +8,7 @@ part of 'order_model.dart';
 
 OrderProductModel _$OrderProductModelFromJson(Map<String, dynamic> json) =>
     OrderProductModel(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       detail: json['detail'] as String,
       imgUrl: DataUtils.pathToUrl(json['imgUrl'] as String),
@@ -40,7 +40,7 @@ Map<String, dynamic> _$OrderProductAndCountModelToJson(
     };
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
-      id: json['id'] as String,
+      id: json['id'] as int,
       products: (json['products'] as List<dynamic>)
           .map((e) =>
               OrderProductAndCountModel.fromJson(e as Map<String, dynamic>))

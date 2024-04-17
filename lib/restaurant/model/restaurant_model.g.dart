@@ -8,33 +8,30 @@ part of 'restaurant_model.dart';
 
 RestaurantModel _$RestaurantModelFromJson(Map<String, dynamic> json) =>
     RestaurantModel(
-      id: json['id'] as String,
+      id: json['id'] as int,
+      uuid: json['uuid'] as String,
       name: json['name'] as String,
       thumbUrl: DataUtils.pathToUrl(json['thumbUrl'] as String),
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-      priceRange:
-          $enumDecode(_$RestaurantPriceRangeEnumMap, json['priceRange']),
       ratings: (json['ratings'] as num).toDouble(),
       ratingsCount: json['ratingsCount'] as int,
-      deliveryTime: json['deliveryTime'] as int,
-      deliveryFee: json['deliveryFee'] as int,
+      deliveryTimeFrom: json['deliveryTimeFrom'] as int,
+      deliveryTimeTo: json['deliveryTimeTo'] as int,
+      deliveryFeeFrom: json['deliveryFeeFrom'] as int,
+      deliveryFeeTo: json['deliveryFeeTo'] as int,
     );
 
 Map<String, dynamic> _$RestaurantModelToJson(RestaurantModel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'uuid': instance.uuid,
       'name': instance.name,
       'thumbUrl': instance.thumbUrl,
       'tags': instance.tags,
-      'priceRange': _$RestaurantPriceRangeEnumMap[instance.priceRange]!,
       'ratings': instance.ratings,
       'ratingsCount': instance.ratingsCount,
-      'deliveryTime': instance.deliveryTime,
-      'deliveryFee': instance.deliveryFee,
+      'deliveryTimeFrom': instance.deliveryTimeFrom,
+      'deliveryTimeTo': instance.deliveryTimeTo,
+      'deliveryFeeFrom': instance.deliveryFeeFrom,
+      'deliveryFeeTo': instance.deliveryFeeTo,
     };
-
-const _$RestaurantPriceRangeEnumMap = {
-  RestaurantPriceRange.expensive: 'expensive',
-  RestaurantPriceRange.medium: 'medium',
-  RestaurantPriceRange.cheap: 'cheap',
-};

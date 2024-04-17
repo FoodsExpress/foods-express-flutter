@@ -130,11 +130,6 @@ class CustomInterceptor extends Interceptor {
         return handler.resolve(response);
       } on DioException catch (e) {
         // circular dependency error
-        // A, B
-        // A -> B의 친구
-        // B -> A의 친구
-        // A는 B의 친구구나
-        // A -> B -> A -> B -> A -> B
         // ump -> dio -> ump -> dio
         ref.read(authProvider.notifier).logout();
 

@@ -34,7 +34,7 @@ class BasketScreen extends ConsumerWidget {
       (p, n) => p + (n.product.price * n.count),
     );
 
-    final deliveryFee = basket.first.product.restaurant.deliveryFee;
+    final deliveryFee = basket.first.product.restaurant.deliveryFeeFrom;
 
     return DefaultLayout(
       title: '장바구니',

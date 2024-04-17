@@ -36,7 +36,7 @@ class _RestaurantRepository implements RestaurantRepository {
     )
             .compose(
               _dio.options,
-              '/',
+              '',
               queryParameters: queryParameters,
               data: _data,
             )

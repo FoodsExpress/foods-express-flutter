@@ -8,7 +8,7 @@ part 'rating_model.g.dart';
 @JsonSerializable()
 class RatingModel implements IModelWithId {
   @override
-  final String id;
+  final int id;
   final UserModel user;
   final int rating;
   final String content;

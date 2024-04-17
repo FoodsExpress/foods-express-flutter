@@ -8,7 +8,7 @@ part 'product_model.g.dart';
 @JsonSerializable()
 class ProductModel implements IModelWithId {
   @override
-  final String id;
+  final int id;
 
   // 상품 이름
   final String name;

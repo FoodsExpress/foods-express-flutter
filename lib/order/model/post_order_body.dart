@@ -24,7 +24,7 @@ class PostOrderBody {
 
 @JsonSerializable()
 class PostOrderBodyProduct {
-  final String productId;
+  final int productId;
   final int count;
 
   PostOrderBodyProduct({

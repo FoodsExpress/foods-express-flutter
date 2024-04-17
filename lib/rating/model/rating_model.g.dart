@@ -7,7 +7,7 @@ part of 'rating_model.dart';
 // **************************************************************************
 
 RatingModel _$RatingModelFromJson(Map<String, dynamic> json) => RatingModel(
-      id: json['id'] as String,
+      id: json['id'] as int,
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
       rating: json['rating'] as int,
       content: json['content'] as String,

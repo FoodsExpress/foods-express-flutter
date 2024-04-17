@@ -21,7 +21,7 @@ Map<String, dynamic> _$PatchBasketBodyToJson(PatchBasketBody instance) =>
 PatchBasketBodyBasket _$PatchBasketBodyBasketFromJson(
         Map<String, dynamic> json) =>
     PatchBasketBodyBasket(
-      productId: json['productId'] as String,
+      productId: json['productId'] as int,
       count: json['count'] as int,
     );
 

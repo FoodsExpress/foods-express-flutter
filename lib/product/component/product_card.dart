@@ -10,7 +10,7 @@ class ProductCard extends ConsumerWidget {
   final String name;
   final String detail;
   final int price;
-  final String id;
+  final int id;
   final VoidCallback? onSubtract;
   final VoidCallback? onAdd;
 
