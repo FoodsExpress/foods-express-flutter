@@ -23,10 +23,10 @@ class RestaurantModel implements IModelWithId {
   final List<String> tags;
   final double ratings;
   final int ratingsCount;
-  final int deliveryTimeFrom;
-  final int deliveryTimeTo;
-  final int deliveryFeeFrom;
-  final int deliveryFeeTo;
+  final int deliveryMinTime;
+  final int deliveryMaxTime;
+  final int deliveryMinFee;
+  final int deliveryMaxFee;
 
   RestaurantModel({
     required this.id,
@@ -36,10 +36,10 @@ class RestaurantModel implements IModelWithId {
     required this.tags,
     required this.ratings,
     required this.ratingsCount,
-    required this.deliveryTimeFrom,
-    required this.deliveryTimeTo,
-    required this.deliveryFeeFrom,
-    required this.deliveryFeeTo,
+    required this.deliveryMinTime,
+    required this.deliveryMaxTime,
+    required this.deliveryMinFee,
+    required this.deliveryMaxFee,
   });
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>

@@ -11,7 +11,7 @@ class _PaginationInfo {
   final bool forceRefetch;
 
   _PaginationInfo({
-    this.fetchCount = 10,
+    this.fetchCount = 5,
     this.fetchMore = false,
     this.forceRefetch = false,
   });
@@ -78,7 +78,7 @@ class PaginationProvider<T extends IModelWithId,
       if (state is CursorPagination && !forceRefetch) {
         final pState = state as CursorPagination;
 
-        if (!pState.meta.hasMore) {
+        if (!pState.hasMore) {
           return;
         }
       }
@@ -103,7 +103,7 @@ class PaginationProvider<T extends IModelWithId,
         final pState = state as CursorPagination<T>;
 
         state = CursorPaginationFetchingMore(
-          meta: pState.meta,
+          hasMore: pState.hasMore,
           data: pState.data,
         );
 
@@ -119,7 +119,7 @@ class PaginationProvider<T extends IModelWithId,
           final pState = state as CursorPagination<T>;
 
           state = CursorPaginationRefetching<T>(
-            meta: pState.meta,
+            hasMore: pState.hasMore,
             data: pState.data,
           );
         }

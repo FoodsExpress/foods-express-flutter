@@ -15,10 +15,10 @@ RestaurantModel _$RestaurantModelFromJson(Map<String, dynamic> json) =>
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       ratings: (json['ratings'] as num).toDouble(),
       ratingsCount: json['ratingsCount'] as int,
-      deliveryTimeFrom: json['deliveryTimeFrom'] as int,
-      deliveryTimeTo: json['deliveryTimeTo'] as int,
-      deliveryFeeFrom: json['deliveryFeeFrom'] as int,
-      deliveryFeeTo: json['deliveryFeeTo'] as int,
+      deliveryMinTime: json['deliveryMinTime'] as int,
+      deliveryMaxTime: json['deliveryMaxTime'] as int,
+      deliveryMinFee: json['deliveryMinFee'] as int,
+      deliveryMaxFee: json['deliveryMaxFee'] as int,
     );
 
 Map<String, dynamic> _$RestaurantModelToJson(RestaurantModel instance) =>
@@ -30,8 +30,8 @@ Map<String, dynamic> _$RestaurantModelToJson(RestaurantModel instance) =>
       'tags': instance.tags,
       'ratings': instance.ratings,
       'ratingsCount': instance.ratingsCount,
-      'deliveryTimeFrom': instance.deliveryTimeFrom,
-      'deliveryTimeTo': instance.deliveryTimeTo,
-      'deliveryFeeFrom': instance.deliveryFeeFrom,
-      'deliveryFeeTo': instance.deliveryFeeTo,
+      'deliveryMinTime': instance.deliveryMinTime,
+      'deliveryMaxTime': instance.deliveryMaxTime,
+      'deliveryMinFee': instance.deliveryMinFee,
+      'deliveryMaxFee': instance.deliveryMaxFee,
     };

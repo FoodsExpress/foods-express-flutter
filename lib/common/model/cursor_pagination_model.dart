@@ -18,20 +18,20 @@ class CursorPaginationLoading extends CursorPaginationBase {}
   genericArgumentFactories: true,
 )
 class CursorPagination<T> extends CursorPaginationBase {
-  final CursorPaginationMeta meta;
+  final bool hasMore;
   final List<T> data;
 
   CursorPagination({
-    required this.meta,
+    required this.hasMore,
     required this.data,
   });
 
   CursorPagination copyWith({
-    CursorPaginationMeta? meta,
+    bool? hasMore,
     List<T>? data,
   }) {
     return CursorPagination<T>(
-      meta: meta ?? this.meta,
+      hasMore: hasMore ?? this.hasMore,
       data: data ?? this.data,
     );
   }
@@ -41,34 +41,10 @@ class CursorPagination<T> extends CursorPaginationBase {
       _$CursorPaginationFromJson(json, fromJsonT);
 }
 
-@JsonSerializable()
-class CursorPaginationMeta {
-  final int count;
-  final bool hasMore;
-
-  CursorPaginationMeta({
-    required this.count,
-    required this.hasMore,
-  });
-
-  CursorPaginationMeta copyWith({
-    int? count,
-    bool? hasMore,
-  }) {
-    return CursorPaginationMeta(
-      count: count ?? this.count,
-      hasMore: hasMore ?? this.hasMore,
-    );
-  }
-
-  factory CursorPaginationMeta.fromJson(Map<String, dynamic> json) =>
-      _$CursorPaginationMetaFromJson(json);
-}
-
 // 새로고침 할때
 class CursorPaginationRefetching<T> extends CursorPagination<T> {
   CursorPaginationRefetching({
-    required super.meta,
+    required super.hasMore,
     required super.data,
   });
 }
@@ -77,7 +53,7 @@ class CursorPaginationRefetching<T> extends CursorPagination<T> {
 // 추가 데이터를 요청하는중
 class CursorPaginationFetchingMore<T> extends CursorPagination<T> {
   CursorPaginationFetchingMore({
-    required super.meta,
+    required super.hasMore,
     required super.data,
   });
 }
